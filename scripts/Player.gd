@@ -9,6 +9,19 @@ func _ready():
 	hide()
 
 func _process(delta):
+	move(delta)
+
+func _on_body_entered(body):
+	hide()
+	hit.emit()
+	$CollisionShape2D.set_deferred("disabled", true)
+
+func start(new_position):
+	position = new_position
+	show()
+	$CollisionShape2D.set_deferred("disabled", false)
+
+func move(delta):
 	var velocity = Vector2.ZERO # The player's movement vector.
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
@@ -18,13 +31,13 @@ func _process(delta):
 		velocity.y += 1
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
-		
+
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 		$AnimatedSprite2D.play()
 	else:
 		$AnimatedSprite2D.stop()
-	
+
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
 
@@ -36,19 +49,3 @@ func _process(delta):
 	elif velocity.y != 0:
 		$AnimatedSprite2D.animation = "up"
 		$AnimatedSprite2D.flip_v = velocity.y > 0
-
-
-func _on_body_entered(body):
-	hide()
-	hit.emit()
-	$CollisionShape2D.set_deferred("disabled", true)
-	
-func start(new_position):
-	position = new_position
-	show()
-	$CollisionShape2D.set_deferred("disabled", false)
-	
-	
-
-
-
