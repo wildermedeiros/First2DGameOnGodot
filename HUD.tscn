@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://8gfbes526btu"]
+[gd_scene load_steps=5 format=3 uid="uid://8gfbes526btu"]
 
 [ext_resource type="FontFile" uid="uid://bmt501r18djaf" path="res://fonts/Xolonium-Regular.ttf" id="1_i27my"]
 [ext_resource type="Script" path="res://scripts/HUD.gd" id="1_pwgbb"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_voq05"]
+action = &"start_game"
+
+[sub_resource type="Shortcut" id="Shortcut_0bfcq"]
+events = [SubResource("InputEventAction_voq05")]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_pwgbb")
@@ -50,6 +56,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("1_i27my")
 theme_override_font_sizes/font_size = 64
+shortcut = SubResource("Shortcut_0bfcq")
 text = "Jogar"
 
 [node name="MessageTimer" type="Timer" parent="."]
