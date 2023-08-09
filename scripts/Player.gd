@@ -1,32 +1,22 @@
 extends Area2D
 
-@export var main_scene: PackedScene
-@onready var main_script = $Main
 @export var speed = 400
+
 var screen_size
+var main
+
 signal hit
 
 func _ready():
 	screen_size = get_viewport_rect().size
 	hide()
-	print(main_scene)
-	print(main_script)
+	main = get_parent()
 
 func _process(delta):
 	move(delta)
 
-func _on_body_entered(body):
-	hide()
-	hit.emit()
-	$CollisionShape2D.set_deferred("disabled", true)
-
-func start(new_position):
-	position = new_position
-	show()
-	$CollisionShape2D.set_deferred("disabled", false)
-
 func move(delta):
-	var velocity = Vector2.ZERO # The player's movement vector.
+	var velocity = Vector2.ZERO
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
 	if Input.is_action_pressed("move_left"):
@@ -48,11 +38,22 @@ func move(delta):
 	if velocity.x != 0:
 		$AnimatedSprite2D.animation = "walk"
 		$AnimatedSprite2D.flip_v = false
-		# See the note below about boolean assignment.
 		$AnimatedSprite2D.flip_h = velocity.x < 0
 	elif velocity.y != 0:
 		$AnimatedSprite2D.animation = "up"
 		$AnimatedSprite2D.flip_v = velocity.y > 0
 
+func start(new_position):
+	position = new_position
+	show()
+	$CollisionShape2D.set_deferred("disabled", false)
+
+func _on_body_entered(body):
+	hide()
+	hit.emit()
+	$CollisionShape2D.set_deferred("disabled", true)
+
 func _on_area_entered(area):
-	pass
+	main.increment_score(10)
+	area.hide()
+	main.update_score

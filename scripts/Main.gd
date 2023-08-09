@@ -41,13 +41,17 @@ func _on_mob_timer_timeout():
 
 func _on_score_timer_timeout():
 	score += 1
-	$HUD.update_score(score)
+	update_score(score)
 
 func _on_start_timer_timeout():
 	$ScoreTimer.start()
 	$MobTimer.start()
 
-
 func _on_spawn_pickup_timer_timeout():
 	pass # Replace with function body.
 
+func increment_score(value):
+	score += value
+
+func update_score(score):
+	$HUD.update_score(score)
