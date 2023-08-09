@@ -1,5 +1,7 @@
 extends Area2D
 
+@export var main_scene: PackedScene
+@onready var main_script = $Main
 @export var speed = 400
 var screen_size
 signal hit
@@ -7,6 +9,8 @@ signal hit
 func _ready():
 	screen_size = get_viewport_rect().size
 	hide()
+	print(main_scene)
+	print(main_script)
 
 func _process(delta):
 	move(delta)
@@ -49,3 +53,6 @@ func move(delta):
 	elif velocity.y != 0:
 		$AnimatedSprite2D.animation = "up"
 		$AnimatedSprite2D.flip_v = velocity.y > 0
+
+func _on_area_entered(area):
+	pass

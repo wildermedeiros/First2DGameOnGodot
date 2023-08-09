@@ -1,6 +1,7 @@
 extends Node
 
 @export var mob_scene: PackedScene
+@export var pickup_scene: PackedScene
 var score
 
 func game_over():
@@ -34,7 +35,7 @@ func _on_mob_timer_timeout():
 #	mob.rotation = direction
 #
 #	var velocity = Vector2(randf_range(150, 250), 0)
-#	mob.linear_velocity = velocity.rotated(direction) 
+#	mob.linear_velocity = velocity.rotated(direction)
 #
 #	add_child(mob)
 
@@ -45,4 +46,8 @@ func _on_score_timer_timeout():
 func _on_start_timer_timeout():
 	$ScoreTimer.start()
 	$MobTimer.start()
-	
+
+
+func _on_spawn_pickup_timer_timeout():
+	pass # Replace with function body.
+
