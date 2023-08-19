@@ -10,10 +10,8 @@ func show_message(text):
 func show_game_over():
 	show_message("Fim de jogo")
 	await $MessageTimer.timeout
-
 	$Message.text = "Desvie dos bichos!"
 	$Message.show()
-
 	await get_tree().create_timer(1.0).timeout
 	$StartButton.show()
 

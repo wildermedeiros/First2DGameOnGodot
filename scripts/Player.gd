@@ -54,6 +54,7 @@ func _on_body_entered(body):
 	$CollisionShape2D.set_deferred("disabled", true)
 
 func _on_area_entered(area):
-	main.increment_score(10)
-	area.hide()
-	main.update_score
+	main.increment_score(area.score_to_add)
+	area.queue_free()
+	main.update_score(area.score_to_add)
+
