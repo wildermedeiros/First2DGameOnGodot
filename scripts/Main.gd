@@ -3,6 +3,8 @@ extends Node
 @export var mob_scene: PackedScene
 @export var pickup_scene: PackedScene
 var score
+signal on_score_update
+
 
 func game_over():
 	$ScoreTimer.stop()
@@ -21,7 +23,6 @@ func new_game():
 	$BackgroundMusic.play()
 
 func _on_mob_timer_timeout():
-	pass
 	var mob = mob_scene.instantiate()
 
 	var mob_spawn_location = get_node("MobPath/MobSpawnLocation")
@@ -42,16 +43,19 @@ func _on_mob_timer_timeout():
 func _on_score_timer_timeout():
 	score += 1
 	update_score(score)
+#	on_score_update.emit()
 
 func _on_start_timer_timeout():
 	$ScoreTimer.start()
 	$MobTimer.start()
 
 func _on_spawn_pickup_timer_timeout():
-	pass # Replace with function body.
+	pass
+#	spawn pickups to increase score points
 
 func increment_score(value):
 	score += value
+	update_score(score)
 
 func update_score(new_score):
 	$HUD.update_score(new_score)

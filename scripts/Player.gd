@@ -1,4 +1,4 @@
-extends Area2D
+class_name Player extends Area2D
 
 @export var speed = 400
 
@@ -52,9 +52,4 @@ func _on_body_entered(body):
 	hide()
 	hit.emit()
 	$CollisionShape2D.set_deferred("disabled", true)
-
-func _on_area_entered(area):
-	main.increment_score(area.score_to_add)
-	area.queue_free()
-	main.update_score(area.score_to_add)
 
