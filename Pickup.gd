@@ -1,4 +1,4 @@
-extends Area2D
+class_name Pickup extends Area2D
 
 @export var score_to_add = 10:
 	get: return score_to_add
@@ -23,5 +23,5 @@ func _on_area_entered(area):
 func spawn_display_text():
 	var display_text = display_text_scene.instantiate()
 	display_text.position = self.position
-	display_text.text = str(score_to_add)
+	display_text.text = "+" + str(score_to_add)
 	main.add_child(display_text)

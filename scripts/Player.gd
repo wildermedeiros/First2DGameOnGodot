@@ -50,6 +50,10 @@ func start(new_position):
 
 func _on_body_entered(body):
 	hide()
+	# screen shake
 	hit.emit()
 	$CollisionShape2D.set_deferred("disabled", true)
 
+func _on_area_entered(area):
+	if area is Pickup:
+		$PickupCollectSound.play()

@@ -6,7 +6,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a431r"]
 
-[node name="Pickup" type="Area2D"]
+[node name="Pickup" type="Area2D" groups=["pickups"]]
 script = ExtResource("1_mldju")
 display_text_scene = ExtResource("2_m75ak")
 

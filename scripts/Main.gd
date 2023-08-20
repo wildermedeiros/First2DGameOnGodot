@@ -1,4 +1,4 @@
-extends Node
+class_name Main extends Node
 
 @export var mob_scene: PackedScene
 @export var pickup_scene: PackedScene
@@ -20,6 +20,7 @@ func new_game():
 	$HUD.update_score(score)
 	$HUD.show_message("Get Ready")
 	get_tree().call_group("mobs", "queue_free")
+	get_tree().call_group("pickups", "queue_free")
 	$BackgroundMusic.play()
 
 func _on_mob_timer_timeout():
@@ -48,10 +49,15 @@ func _on_score_timer_timeout():
 func _on_start_timer_timeout():
 	$ScoreTimer.start()
 	$MobTimer.start()
+	$SpawnPickupTimer.start()
 
 func _on_spawn_pickup_timer_timeout():
-	pass
-#	spawn pickups to increase score points
+	var pickup = pickup_scene.instantiate()
+	var pickup_spawn_location = $PickupPath/PickupSpawnLocation
+	pickup_spawn_location.progress_ratio = randf()
+	pickup.position = pickup_spawn_location.position
+	add_child(pickup)
+	$PickupSpawnSound.play()
 
 func increment_score(value):
 	score += value
