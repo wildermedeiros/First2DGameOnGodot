@@ -4,6 +4,7 @@ class_name Player extends Area2D
 
 var screen_size
 var main
+var input_direction
 
 signal hit
 
@@ -15,8 +16,7 @@ func _ready():
 func _process(delta):
 	move(delta)
 	if Input.is_action_just_pressed("shoot"):
-		$Gun.spawn_projectile()
-		print("Atirei")
+		$Gun.Shoot()
 
 func move(delta):
 	var velocity = Vector2.ZERO
@@ -28,6 +28,7 @@ func move(delta):
 		velocity.y += 1
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
+	input_direction = velocity
 
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
@@ -50,6 +51,9 @@ func start(new_position):
 	position = new_position
 	show()
 	$CollisionShape2D.set_deferred("disabled", false)
+
+func get_input_direction():
+	return input_direction
 
 func _on_body_entered(body):
 	hide()

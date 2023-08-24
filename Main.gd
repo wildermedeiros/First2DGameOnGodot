@@ -3,6 +3,7 @@ class_name Main extends Node
 @export var mob_scene: PackedScene
 @export var pickup_scene: PackedScene
 var score
+@export var disable_mobs = false
 signal on_score_update
 
 
@@ -24,6 +25,8 @@ func new_game():
 	$BackgroundMusic.play()
 
 func _on_mob_timer_timeout():
+	if disable_mobs:
+		return
 	var mob = mob_scene.instantiate()
 
 	var mob_spawn_location = get_node("MobPath/MobSpawnLocation")
