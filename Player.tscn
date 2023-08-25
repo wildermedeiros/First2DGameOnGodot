@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://1g5lwin6snkl"]
+[gd_scene load_steps=11 format=3 uid="uid://1g5lwin6snkl"]
 
 [ext_resource type="Texture2D" uid="uid://d06f6m5lutv5u" path="res://art/playerGrey_up1.png" id="1_0xxdx"]
 [ext_resource type="Script" path="res://Player.gd" id="1_jxr7x"]
@@ -37,6 +37,9 @@ animations = [{
 radius = 25.0
 height = 50.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_oedkq"]
+radius = 263.068
+
 [node name="Player" type="Area2D"]
 script = ExtResource("1_jxr7x")
 
@@ -57,5 +60,11 @@ stream = ExtResource("6_j7flt")
 [node name="Marker2D" type="Marker2D" parent="Gun"]
 position = Vector2(0, -7)
 
+[node name="Range" type="Area2D" parent="Gun"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gun/Range"]
+shape = SubResource("CircleShape2D_oedkq")
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="Gun/Range" to="Gun" method="_on_range_area_entered"]
