@@ -48,6 +48,8 @@ animations = [{
 radius = 33.7343
 
 [node name="Mob" type="RigidBody2D" groups=["mobs"]]
+collision_layer = 16
+collision_mask = 42
 gravity_scale = 0.0
 script = ExtResource("1_3xwmv")
 metadata/_edit_group_ = true

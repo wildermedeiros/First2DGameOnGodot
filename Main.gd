@@ -3,7 +3,7 @@ class_name Main extends Node
 @export var mob_scene: PackedScene
 @export var pickup_scene: PackedScene
 var score
-@export var disable_mobs = false
+@export var debugging_mode = false
 signal on_score_update
 
 
@@ -20,13 +20,13 @@ func new_game():
 	$StartTimer.start()
 	$HUD.update_score(score)
 	$HUD.show_message("Get Ready")
-	if !disable_mobs:
+	if !debugging_mode:
 		get_tree().call_group("mobs", "queue_free")
 	get_tree().call_group("pickups", "queue_free")
 	$BackgroundMusic.play()
 
 func _on_mob_timer_timeout():
-	if disable_mobs:
+	if debugging_mode:
 		return
 	var mob = mob_scene.instantiate()
 
@@ -53,7 +53,7 @@ func _on_score_timer_timeout():
 func _on_start_timer_timeout():
 	$ScoreTimer.start()
 	$MobTimer.start()
-	if !disable_mobs:
+	if !debugging_mode:
 		$SpawnPickupTimer.start()
 
 func _on_spawn_pickup_timer_timeout():

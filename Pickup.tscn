@@ -7,6 +7,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a431r"]
 
 [node name="Pickup" type="Area2D" groups=["pickups"]]
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_mldju")
 display_text_scene = ExtResource("2_m75ak")
 

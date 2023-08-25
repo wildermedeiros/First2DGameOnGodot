@@ -8,3 +8,6 @@ func _process(delta):
 
 func set_direction(value):
 	direction = value
+
+func _on_body_entered(body):
+	body.queue_free()
