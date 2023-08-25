@@ -57,7 +57,7 @@ func get_input_direction():
 
 func _on_body_entered(body):
 	hide()
-	# screen shake
+	# note screen shake
 	hit.emit()
 	$CollisionShape2D.set_deferred("disabled", true)
 

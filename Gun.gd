@@ -17,7 +17,7 @@ func set_target_direction(value):
 func get_target_direction():
 	return target_direction
 
-#this can be on the radar object and pass the direction through the set function
+# note this can be on the radar object and pass the direction through the set function
 func _on_range_radar_time_timeout():
 	var bodies = $Radar.get_overlapping_bodies()
 	if bodies.is_empty():
@@ -28,7 +28,8 @@ func _on_range_radar_time_timeout():
 		if target_distance < closest_distance:
 			set_target_direction(target.position.direction_to(player.position))
 			closest_distance = target_distance
-		
+	
+# note stopping shoting on death
 func _on_shoot_rate_timeout():
 	if !$Radar.has_overlapping_bodies():
 		return
