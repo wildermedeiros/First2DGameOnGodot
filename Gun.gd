@@ -1,42 +1,47 @@
 extends Node2D
 
 @export var projectile_scene: PackedScene
-var direction_to_target = Vector2.LEFT
+var target_direction = Vector2.RIGHT
+var bodies
+# math infinity
+var closest_distance = 100000 				
+@onready var player = get_parent()
 
 #func _process(delta):
 #	rotation = direction.angle()
 
 func Shoot():
 	var projectile = projectile_scene.instantiate()
-	var player = get_parent()
 	projectile.position = player.position
-	projectile.set_direction(get_direction_to_target())
+	projectile.set_direction(get_target_direction())
 	var parent = get_tree().get_first_node_in_group("projectiles")
 	parent.add_child(projectile)
 
-# Mudar o metodo para body, porque o mob é body
+
+func set_target_direction(value):
+	target_direction = value
+
+func get_target_direction():
+	return target_direction
+
 # Se a colisão não funcionar ou não identificar, observar matrix de colisão do mob, talvez colocá-lo em uma separada
 # Verificar também a matriz de colisão do projétil 
-func _on_range_area_entered(area):
-	if area != Mob:
+# Verificar o calculo da distancia para o radar pegar mobs proximos e não travar no primeiro selecionado
+
+# func _on_range_body_entered(body):
+#	if body != Mob:
+#		return
+
+func _on_range_radar_time_timeout():
+	var bodies = $Radar.get_overlapping_bodies()
+	if bodies.is_empty():
 		return
-	var areas = $Range.get_overlapping_areas()
-	var closest_distance = area.position.distance_to(position)
-	for target in areas:
-		var distance = target.position.distance_to(position)
-		if distance < closest_distance:
-			closest_distance = distance
-			set_direction_to_target(target.position.direction_to(position))
+	for target in bodies:
+		var target_distance = target.position.distance_to(player.position)
+		if target_distance < closest_distance:
+			set_target_direction(target.position.direction_to(player.position))
+			print(target.name)
+			closest_distance = target_distance
 		else:
 			continue
-	set_direction_to_target(area.position.direction_to(position))
-
-func set_direction_to_target(value):
-	direction_to_target = value
-
-func get_direction_to_target():
-	return direction_to_target
-
-
-
-
+	set_target_direction(bodies[0].position.direction_to(player.position))

@@ -20,7 +20,8 @@ func new_game():
 	$StartTimer.start()
 	$HUD.update_score(score)
 	$HUD.show_message("Get Ready")
-	get_tree().call_group("mobs", "queue_free")
+	if !disable_mobs:
+		get_tree().call_group("mobs", "queue_free")
 	get_tree().call_group("pickups", "queue_free")
 	$BackgroundMusic.play()
 
@@ -52,7 +53,8 @@ func _on_score_timer_timeout():
 func _on_start_timer_timeout():
 	$ScoreTimer.start()
 	$MobTimer.start()
-	$SpawnPickupTimer.start()
+	if !disable_mobs:
+		$SpawnPickupTimer.start()
 
 func _on_spawn_pickup_timer_timeout():
 	var pickup = pickup_scene.instantiate()
