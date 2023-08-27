@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://cy2qonyfhlg44"]
 
 [ext_resource type="Script" path="res://scenes/guns/Gun.gd" id="1_7q18x"]
-[ext_resource type="PackedScene" uid="uid://bdi1sqmrsvs84" path="res://Projectile.tscn" id="2_e080l"]
+[ext_resource type="PackedScene" uid="uid://bdi1sqmrsvs84" path="res://scenes/projectiles/forward/ForwardProjectile.tscn" id="2_tytb5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_et1xk"]
 radius = 1282.37
 
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_7q18x")
-projectile_scene = ExtResource("2_e080l")
+projectile_scene = ExtResource("2_tytb5")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 
