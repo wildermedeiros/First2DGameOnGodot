@@ -17,7 +17,7 @@ func _process(delta):
 	move(delta)
 	if Input.is_action_just_pressed("shoot"):
 		$Gun.Shoot()
-
+	
 func move(delta):
 	var velocity = Vector2.ZERO
 	if Input.is_action_pressed("move_right"):

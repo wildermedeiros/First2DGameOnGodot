@@ -2,10 +2,11 @@ class_name Main extends Node
 
 @export var mob_scene: PackedScene
 @export var pickup_scene: PackedScene
-var score
 @export var debugging_mode = false
-signal on_score_update
 
+var score
+
+signal on_score_update
 
 func game_over():
 	$ScoreTimer.stop()
