@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://1g5lwin6snkl"]
+[gd_scene load_steps=11 format=3 uid="uid://1g5lwin6snkl"]
 
 [ext_resource type="Script" path="res://scenes/characters/player/Player.gd" id="1_orus5"]
 [ext_resource type="Texture2D" uid="uid://d06f6m5lutv5u" path="res://art/playerGrey_up1.png" id="2_pb6vo"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://hfnbh2rxml37" path="res://art/playerGrey_walk2.png" id="5_tbgbk"]
 [ext_resource type="AudioStream" uid="uid://cpt8tlkn1td3g" path="res://art/threeTone1.ogg" id="6_ka78v"]
 [ext_resource type="PackedScene" uid="uid://cy2qonyfhlg44" path="res://scenes/guns/Gun.tscn" id="7_jto2s"]
+[ext_resource type="PackedScene" uid="uid://bo5ww3nc8b0fr" path="res://scenes/stats/Health.tscn" id="8_urmak"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xlghv"]
 animations = [{
@@ -41,6 +42,7 @@ height = 50.0
 collision_layer = 2
 collision_mask = 20
 script = ExtResource("1_orus5")
+metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -55,6 +57,8 @@ shape = SubResource("CapsuleShape2D_f1tjg")
 stream = ExtResource("6_ka78v")
 
 [node name="Gun" parent="." instance=ExtResource("7_jto2s")]
+
+[node name="Health" parent="." instance=ExtResource("8_urmak")]
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -7,6 +7,7 @@ func _physics_process(delta):
 	position += velocity * delta * speed
 
 func _on_body_entered(body):
-	body.queue_free()
+	var health = body.get_node("Health")
+	print(health)
 	if !has_piercing:
 		queue_free()
