@@ -12,7 +12,8 @@ func _process(delta):
 
 func take_damage(damage):
 	if is_dead: return
-	health = min(health, damage)
+	var damage_to_apply = min(health, damage)
+	health -= damage_to_apply 
 	if health == 0:
 		die()
 

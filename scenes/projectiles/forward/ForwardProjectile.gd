@@ -8,6 +8,8 @@ func _physics_process(delta):
 
 func _on_body_entered(body):
 	var health = body.get_node("Health")
-	print(health)
+	if health != null:
+		health.take_damage(damage)
+		print("Vida total: ", health.health)
 	if !has_piercing:
 		queue_free()
