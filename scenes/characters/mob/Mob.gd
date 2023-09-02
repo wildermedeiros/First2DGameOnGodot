@@ -1,5 +1,9 @@
 class_name Mob extends RigidBody2D
 
+@export var collision_damage = 50:
+	get: return collision_damage
+	set(value): collision_damage = value
+
 func _ready():
 	var mob_types = $AnimatedSprite2D.sprite_frames.get_animation_names()
 	$AnimatedSprite2D.play(mob_types[randi() % mob_types.size()])

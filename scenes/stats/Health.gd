@@ -1,7 +1,9 @@
 extends Node
 
 @export var max_health = 100
-var health
+var health:
+	get: return health
+	set(value): health = value
 var is_dead = false
 
 func _ready():

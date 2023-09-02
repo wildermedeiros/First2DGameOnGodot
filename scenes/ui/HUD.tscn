@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://8gfbes526btu"]
+[gd_scene load_steps=7 format=3 uid="uid://8gfbes526btu"]
 
 [ext_resource type="FontFile" uid="uid://bmt501r18djaf" path="res://fonts/Xolonium-Regular.ttf" id="1_i27my"]
 [ext_resource type="Script" path="res://scenes/ui/HUD.gd" id="1_pwgbb"]
@@ -8,6 +8,12 @@ action = &"start_game"
 
 [sub_resource type="Shortcut" id="Shortcut_0bfcq"]
 events = [SubResource("InputEventAction_voq05")]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bmfax"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fuloh"]
+bg_color = Color(0, 0.729412, 0.129412, 0.313726)
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_pwgbb")
@@ -62,6 +68,22 @@ text = "Jogar"
 [node name="MessageTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_bmfax")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fuloh")
+step = 1.0
+value = 100.0
+show_percentage = false
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

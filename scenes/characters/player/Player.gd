@@ -2,6 +2,8 @@ class_name Player extends Area2D
 
 @export var speed = 400
 
+@onready var health = get_node("Health")
+
 var screen_size
 var main
 var input_direction
@@ -56,10 +58,18 @@ func get_input_direction():
 	return input_direction
 
 func _on_body_entered(body):
-	hide()
+#	hit.emit()
+#	hide()
 	# note screen shake
-	hit.emit()
-	$CollisionShape2D.set_deferred("disabled", true)
+	# note_ref #is_same()
+	# note_ref match x
+	if body is Mob:
+		$CollisionShape2D.set_deferred("disabled", true)
+		health.take_damage(body.collision_damage)
+		# display collision feedback (piscar o jogador, sons e etc)
+		main.get_node("HUD").update_life(health.health)
+		await get_tree().create_timer(1).timeout
+		$CollisionShape2D.set_deferred("disabled", false)
 
 func _on_area_entered(area):
 	if area is Pickup:
