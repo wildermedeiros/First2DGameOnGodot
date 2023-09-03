@@ -13,7 +13,7 @@ events = [SubResource("InputEventAction_voq05")]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fuloh"]
-bg_color = Color(0, 0.729412, 0.129412, 0.313726)
+bg_color = Color(0, 0.729412, 0.129412, 0.392157)
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_pwgbb")

@@ -1,8 +1,11 @@
 class_name Player extends Area2D
 
 @export var speed = 400
+@export var blink_time = 3
+@export var blink_speed = 0.25
 
 @onready var health = get_node("Health")
+@onready var default_color = $AnimatedSprite2D.modulate
 
 var screen_size
 var main
@@ -59,18 +62,22 @@ func get_input_direction():
 
 func _on_body_entered(body):
 #	hit.emit()
-#	hide()
-	# note screen shake
-	# note_ref #is_same()
-	# note_ref match x
 	if body is Mob:
 		$CollisionShape2D.set_deferred("disabled", true)
 		health.take_damage(body.collision_damage)
-		# display collision feedback (piscar o jogador, sons e etc)
+		# display collision feedback (screen shake, sons e etc)
 		main.get_node("HUD").update_life(health.health)
+		blink_sprite()
 		await get_tree().create_timer(1).timeout
 		$CollisionShape2D.set_deferred("disabled", false)
 
+func blink_sprite():
+	for i in range(blink_time):
+		$AnimatedSprite2D.modulate = Color.ORANGE_RED
+		await get_tree().create_timer(blink_speed).timeout
+		$AnimatedSprite2D.modulate = default_color
+		await get_tree().create_timer(blink_speed).timeout
+		
 func _on_area_entered(area):
 	if area is Pickup:
 		$PickupCollectSound.play()
