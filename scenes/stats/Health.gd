@@ -14,6 +14,9 @@ func _ready():
 func initialize():
 	health = max_health
 	is_dead = false
+	
+func increment_health(value):
+	health = min(value, max_health)
 
 func take_damage(damage, instigator, scene_damaged):
 	if is_dead: return

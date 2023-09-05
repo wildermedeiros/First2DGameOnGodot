@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bdi1sqmrsvs84"]
 
 [ext_resource type="Script" path="res://scenes/projectiles/forward/ForwardProjectile.gd" id="1_u4282"]
-[ext_resource type="Texture2D" uid="uid://rxyj62hdkayp" path="res://art/d12.png" id="2_ibkmd"]
+[ext_resource type="Texture2D" uid="uid://bivhrhgdrnwts" path="res://art/d4.png" id="2_l31fr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j70lx"]
 radius = 11.0
@@ -19,6 +19,6 @@ shape = SubResource("CircleShape2D_j70lx")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_ibkmd")
+texture = ExtResource("2_l31fr")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,7 +1,7 @@
 class_name Main extends Node
 
 @export var mob_scene: PackedScene
-@export var pickup_scene: PackedScene
+@export var score_pickup_scene: PackedScene
 @export var debugging_mode = false
 @export var player: Player
 
@@ -57,10 +57,10 @@ func _on_start_timer_timeout():
 	$ScoreTimer.start()
 	$MobTimer.start()
 	if !debugging_mode:
-		$SpawnPickupTimer.start()
+		$ScorePickupTimer.start()
 
 func _on_spawn_pickup_timer_timeout():
-	var pickup = pickup_scene.instantiate()
+	var pickup = score_pickup_scene.instantiate()
 	var pickup_spawn_location = $PickupPath/PickupSpawnLocation
 	pickup_spawn_location.progress_ratio = randf()
 	pickup.position = pickup_spawn_location.position

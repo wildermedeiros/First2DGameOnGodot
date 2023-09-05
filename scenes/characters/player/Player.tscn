@@ -59,10 +59,8 @@ shape = SubResource("CapsuleShape2D_f1tjg")
 stream = ExtResource("6_ka78v")
 
 [node name="Gun" parent="." instance=ExtResource("7_jto2s")]
-visible = false
 
 [node name="Health" parent="." instance=ExtResource("8_urmak")]
-max_health = 20
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
