@@ -1,24 +1,30 @@
 extends Node
 
 @export var max_health = 100
+
 var health:
 	get: return health
 	set(value): health = value
+
 var is_dead = false
 
 func _ready():
+	initialize()
+	
+func initialize():
 	health = max_health
+	is_dead = false
 
-func _process(delta):
-	pass
-
-func take_damage(damage):
+func take_damage(damage, instigator, scene_damaged):
 	if is_dead: return
 	var damage_to_apply = min(health, damage)
 	health -= damage_to_apply 
 	if health == 0:
-		die()
+		scene_death_controller(scene_damaged)	
 
-func die():
+func scene_death_controller(scene_damaged):
 	is_dead = true
-	get_parent().queue_free()
+	if scene_damaged.has_method("handle_destruction"):
+		scene_damaged.handle_destruction()
+
+

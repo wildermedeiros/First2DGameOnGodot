@@ -1,8 +1,7 @@
 extends Node2D
 
 @export var projectile_scene: PackedScene
-@onready var player = get_parent()
-@onready var is_Player = player.get_script() == Player
+@onready var parent = get_parent()
 
 var target:
 	get: return target
@@ -13,13 +12,12 @@ var target_direction:
 	set(value): target_direction = value
 
 func Shoot():
+	if parent.get_node("Health").is_dead:
+		return
 	if !$Radar.has_overlapping_bodies(): 
 		return
 	var projectile = projectile_scene.instantiate()
-	if !is_Player:
-		assert(false, "Parente da arma não é o player")	
-		return
-	projectile.position = player.position
+	projectile.position = parent.position
 	if target == null: 	
 		return
 	projectile.rotation = target_direction.angle()
@@ -39,12 +37,11 @@ func _on_range_radar_time_timeout():
 		return
 	var closest_distance = INF
 	for body in bodies:
-		var target_distance = body.position.distance_to(player.position)
+		var target_distance = body.position.distance_to(parent.position)
 		if target_distance < closest_distance:
-			target_direction = player.position.direction_to(body.position)
+			target_direction = parent.position.direction_to(body.position)
 			closest_distance = target_distance
 			target = body
 	
-# note stopping shoting on death
 func _on_shoot_rate_timeout():
 	Shoot()

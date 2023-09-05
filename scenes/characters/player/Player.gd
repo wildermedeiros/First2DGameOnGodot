@@ -55,16 +55,16 @@ func move(delta):
 func start(new_position):
 	position = new_position
 	show()
+	health.initialize()
 	$CollisionShape2D.set_deferred("disabled", false)
 
 func get_input_direction():
 	return input_direction
 
 func _on_body_entered(body):
-#	hit.emit()
 	if body is Mob:
 		$CollisionShape2D.set_deferred("disabled", true)
-		health.take_damage(body.collision_damage)
+		health.take_damage(body.collision_damage, body, self)
 		# display collision feedback (screen shake, sons e etc)
 		main.get_node("HUD").update_life(health.health)
 		blink_sprite()
@@ -77,6 +77,10 @@ func blink_sprite():
 		await get_tree().create_timer(blink_speed).timeout
 		$AnimatedSprite2D.modulate = default_color
 		await get_tree().create_timer(blink_speed).timeout
+		
+func handle_destruction():
+	hide()
+	hit.emit()
 		
 func _on_area_entered(area):
 	if area is Pickup:

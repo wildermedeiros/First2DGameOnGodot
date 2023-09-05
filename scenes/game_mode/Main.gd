@@ -3,6 +3,7 @@ class_name Main extends Node
 @export var mob_scene: PackedScene
 @export var pickup_scene: PackedScene
 @export var debugging_mode = false
+@export var player: Player
 
 var score
 
@@ -17,14 +18,15 @@ func game_over():
 
 func new_game():
 	score = 0
-	$Player.start($StartPosition.position)
+	player.start($StartPosition.position)
 	$StartTimer.start()
 	$HUD.update_score(score)
+	$HUD.update_life(player.get_node("Health").health)
 	$HUD.show_message("Get Ready")
+	$BackgroundMusic.play()
 	if !debugging_mode:
 		get_tree().call_group("mobs", "queue_free")
-	get_tree().call_group("pickups", "queue_free")
-	$BackgroundMusic.play()
+		get_tree().call_group("pickups", "queue_free")
 
 func _on_mob_timer_timeout():
 	if debugging_mode:
