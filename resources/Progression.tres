@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://babvl7jird83a"]
+
+[ext_resource type="Script" path="res://resources/Progression.gd" id="1_svwkx"]
+
+[resource]
+script = ExtResource("1_svwkx")
+max_health = null
+dic = null

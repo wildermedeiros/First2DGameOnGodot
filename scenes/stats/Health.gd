@@ -1,22 +1,20 @@
 extends Node
 
-@export var max_health = 100
-
-var health:
-	get: return health
-	set(value): health = value
-
+@export var stats: Resource = null
+var health = -1
 var is_dead = false
 
 func _ready():
 	initialize()
 	
 func initialize():
-	health = max_health
+	if stats:
+		health = stats.max_health
 	is_dead = false
 	
 func increment_health(value):
-	health = min(value, max_health)
+	if stats:
+		health = min(value, stats.max_health)
 
 func take_damage(damage, instigator, scene_damaged):
 	if is_dead: return
