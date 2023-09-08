@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Stats" load_steps=2 format=3 uid="uid://babvl7jird83a"]
+
+[ext_resource type="Script" path="res://resources/Stats.gd" id="1_pques"]
+
+[resource]
+script = ExtResource("1_pques")
+health = 100

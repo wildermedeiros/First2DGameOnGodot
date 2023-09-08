@@ -1,6 +1,6 @@
 extends Node
 
-@export var stats: Resource = null
+@export var stats_table: Resource = null
 var health = -1
 var is_dead = false
 
@@ -8,13 +8,13 @@ func _ready():
 	initialize()
 	
 func initialize():
-	if stats:
-		health = stats.max_health
+	if stats_table:
+		health = stats_table.data["player"].health
 	is_dead = false
 	
 func increment_health(value):
-	if stats:
-		health = min(value, stats.max_health)
+	if stats_table:
+		health = min(value, stats_table.data["player"].health)
 
 func take_damage(damage, instigator, scene_damaged):
 	if is_dead: return

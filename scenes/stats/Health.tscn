@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bo5ww3nc8b0fr"]
+[gd_scene load_steps=3 format=3 uid="uid://bo5ww3nc8b0fr"]
 
 [ext_resource type="Script" path="res://scenes/stats/Health.gd" id="1_bhw8j"]
+[ext_resource type="Resource" uid="uid://ci2ata24bgcah" path="res://resources/StatsTable.tres" id="2_p8prh"]
 
 [node name="Health" type="Node"]
 script = ExtResource("1_bhw8j")
+stats_table = ExtResource("2_p8prh")
